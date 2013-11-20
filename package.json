@@ -24,9 +24,10 @@
 	"main": "./lib/Merge.js",
 	"devDependencies": {
 		"should": "~1.2.2",
-		"chai": "~1.8.1"
+		"chai": "~1.8.1",
+		"mocha": "~1.14.0"
 	},
 	"scripts": {
-		"test": "cd ./test; mocha ./node/index.js --reporter spec;"
+		"test": "cd ./test; echo \"Testing in node:\"; mocha ./node/index.js --reporter spec; cd ./browser; simq build; echo \"Testing in browser:\"; mocha-phantomjs ./index.html;"
 	}
 }
