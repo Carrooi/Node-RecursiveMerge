@@ -1,10 +1,12 @@
 # Recursive merge
 
-Recursive merge tool for arrays and objects
+Recursive merge tool for arrays and objects.
 
-## Changelog
+## Installation
 
-Changelog is in the bottom of this readme.
+```
+$ npm install recursive-merge
+```
 
 ## Usage
 
@@ -30,7 +32,17 @@ In the same way, you can merge also objects.
 If you will try to merge two different types of objects, exception will be thrown. Also if you will try to merge other
 objects than arrays or objects, exception will be also thrown.
 
+## Tests
+
+```
+$ npm test
+```
+
 ## Changelog
+
+* 1.1.0
+	+ Rewritten tests
+	+ Using chai for assertion (not should)
 
 * 1.0.0
 	+ Initial first version

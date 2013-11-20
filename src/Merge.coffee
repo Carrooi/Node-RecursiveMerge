@@ -4,7 +4,7 @@ merge = (left, right) ->
 	rightType = type.call(right)
 
 	if leftType != rightType
-		throw new Error 'Can not merge ' + leftType + ' with ' + rightType
+		throw new Error 'Can not merge ' + leftType + ' with ' + rightType + '.'
 
 	switch leftType
 		when '[object Array]'
@@ -24,7 +24,7 @@ merge = (left, right) ->
 					left[name] = merge(left[name], value)
 
 		else
-			throw new Error 'Can not merge ' + leftType + ' objects'
+			throw new Error 'Can not merge ' + leftType + ' objects.'
 
 	return left
 
