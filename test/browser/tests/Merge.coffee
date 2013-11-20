@@ -28,6 +28,13 @@ describe 'Merge', ->
 			[10, 11, 12]
 		)).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
+		expect(merge(
+			[one: 1, two: 2, three: 3]
+			[four: 4, five: 5, six: 6]
+			[7, 8, 9]
+			[10, 11, 12]
+		)).to.be.eql([one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, 7, 8, 9, 10, 11, 12])
+
 	it 'should return merged objects', ->
 		expect(merge(
 			{hello: 'world'}
@@ -45,3 +52,10 @@ describe 'Merge', ->
 			{three: 3}
 			{four: 4}
 		)).to.be.eql(one: 1, two: 2, three: 3, four: 4)
+
+		expect(merge(
+			{one: [1]}
+			{two: [2]}
+			{three: [3]}
+			{four: [4]}
+		)).to.be.eql(one: [1], two: [2], three: [3], four: [4])

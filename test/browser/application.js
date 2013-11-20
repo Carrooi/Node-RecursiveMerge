@@ -261,7 +261,29 @@
 	    it('should return merged arrays', function() {
 	      expect(merge([1, 2, 3], [1, 2, 3, 4, 5])).to.be.eql([1, 2, 3, 1, 2, 3, 4, 5]);
 	      expect(merge([[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]])).to.be.eql([[1, 2, 3, 7, 8, 9], [4, 5, 6, 10, 11, 12]]);
-	      return expect(merge([1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12])).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+	      expect(merge([1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12])).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+	      return expect(merge([
+	        {
+	          one: 1,
+	          two: 2,
+	          three: 3
+	        }
+	      ], [
+	        {
+	          four: 4,
+	          five: 5,
+	          six: 6
+	        }
+	      ], [7, 8, 9], [10, 11, 12])).to.be.eql([
+	        {
+	          one: 1,
+	          two: 2,
+	          three: 3,
+	          four: 4,
+	          five: 5,
+	          six: 6
+	        }, 7, 8, 9, 10, 11, 12
+	      ]);
 	    });
 	    return it('should return merged objects', function() {
 	      expect(merge({
@@ -306,7 +328,7 @@
 	          nine: 9
 	        }
 	      });
-	      return expect(merge({
+	      expect(merge({
 	        one: 1
 	      }, {
 	        two: 2
@@ -319,6 +341,20 @@
 	        two: 2,
 	        three: 3,
 	        four: 4
+	      });
+	      return expect(merge({
+	        one: [1]
+	      }, {
+	        two: [2]
+	      }, {
+	        three: [3]
+	      }, {
+	        four: [4]
+	      })).to.be.eql({
+	        one: [1],
+	        two: [2],
+	        three: [3],
+	        four: [4]
 	      });
 	    });
 	  });

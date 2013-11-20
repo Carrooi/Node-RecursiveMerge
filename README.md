@@ -43,6 +43,8 @@ $ npm test
 * 1.1.0
 	+ Rewritten tests
 	+ Using chai for assertion (not should)
+	+ Added some tests
+	+ Added tests for browser
 
 * 1.0.0
 	+ Initial first version
