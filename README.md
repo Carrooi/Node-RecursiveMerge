@@ -10,7 +10,7 @@ $ npm install recursive-merge
 
 ## Usage
 
-With this tool, you can recursivelly merge arrays or objects.
+With this tool, you can recursively merge arrays or objects.
 
 ```
 var merge = require('merge');
@@ -24,7 +24,7 @@ var result = merge(
 
 As you can see, this library just merging objects and not removing duplicates.
 
-You should also know, that this affects first object passed to merge function. Overy other objects (arrays, objects) are
+You should also know, that this affects first object passed to merge function. Every other objects (arrays, objects) are
 added to the first one. There is not any fast simple and universal solution for cloning objects (arrays yes).
 
 In the same way, you can merge also objects.
