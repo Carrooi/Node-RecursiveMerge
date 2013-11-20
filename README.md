@@ -40,7 +40,7 @@ $ npm test
 
 ## Changelog
 
-* 1.1.0
+* 1.1.0 - 1.1.1
 	+ Rewritten tests
 	+ Using chai for assertion (not should)
 	+ Added some tests
