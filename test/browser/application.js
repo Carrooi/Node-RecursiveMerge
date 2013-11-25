@@ -197,11 +197,13 @@
 	      case '[object Object]':
 	        for (name in right) {
 	          value = right[name];
-	          valueType = type.call(value);
-	          if (typeof left[name] === 'undefined' || left[name] === null) {
-	            left[name] = value;
-	          } else if (valueType === '[object Array]' || valueType === '[object Object]') {
-	            left[name] = merge(left[name], value);
+	          if (right.hasOwnProperty(name) && (name !== '__proto__')) {
+	            valueType = type.call(value);
+	            if (typeof left[name] === 'undefined' || left[name] === null) {
+	              left[name] = value;
+	            } else if (valueType === '[object Array]' || valueType === '[object Object]') {
+	              left[name] = merge(left[name], value);
+	            }
 	          }
 	        }
 	        break;
@@ -378,7 +380,7 @@
 	return {
 		"name": "recursive-merge",
 		"description": "Recursive merge tool for arrays and objects",
-		"version": "1.1.1",
+		"version": "1.1.2",
 		"author": {
 			"name": "David Kudera",
 			"email": "sakren@gmail.com"
@@ -413,7 +415,7 @@
 
 }
 });
-require.__setStats({"/lib/Merge.js":{"atime":1385387764000,"mtime":1385387762000,"ctime":1385387762000},"/test/browser/tests/Merge.coffee":{"atime":1385387157000,"mtime":1385387105000,"ctime":1385387105000},"/package.json":{"atime":1385387640000,"mtime":1385387634000,"ctime":1385387634000}});
+require.__setStats({"/lib/Merge.js":{"atime":1385388465000,"mtime":1385388458000,"ctime":1385388458000},"/test/browser/tests/Merge.coffee":{"atime":1385387157000,"mtime":1385387105000,"ctime":1385387105000},"/package.json":{"atime":1385388477000,"mtime":1385388471000,"ctime":1385388471000}});
 require.version = '5.1.2';
 
 /** run section **/

@@ -17,11 +17,12 @@ merge = (left, right) ->
 
 		when '[object Object]'
 			for name, value of right
-				valueType = type.call(value)
-				if typeof left[name] == 'undefined' || left[name] == null
-					left[name] = value
-				else if valueType == '[object Array]' || valueType == '[object Object]'
-					left[name] = merge(left[name], value)
+				if right.hasOwnProperty(name) && name not in ['__proto__']
+					valueType = type.call(value)
+					if typeof left[name] == 'undefined' || left[name] == null
+						left[name] = value
+					else if valueType == '[object Array]' || valueType == '[object Object]'
+						left[name] = merge(left[name], value)
 
 		else
 			throw new Error 'Can not merge ' + leftType + ' objects.'
