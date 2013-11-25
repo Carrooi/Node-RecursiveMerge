@@ -187,7 +187,7 @@
 	        for (i = _i = 0, _len = right.length; _i < _len; i = ++_i) {
 	          value = right[i];
 	          valueType = type.call(value);
-	          if (valueType === '[object Array]' || valueType === '[object Object]') {
+	          if ((valueType === '[object Array]' || valueType === '[object Object]') && value !== null) {
 	            left[i] = merge(left[i], value);
 	          } else {
 	            left.push(value);
@@ -198,7 +198,7 @@
 	        for (name in right) {
 	          value = right[name];
 	          valueType = type.call(value);
-	          if (typeof left[name] === 'undefined') {
+	          if (typeof left[name] === 'undefined' || left[name] === null) {
 	            left[name] = value;
 	          } else if (valueType === '[object Array]' || valueType === '[object Object]') {
 	            left[name] = merge(left[name], value);
@@ -378,7 +378,7 @@
 	return {
 		"name": "recursive-merge",
 		"description": "Recursive merge tool for arrays and objects",
-		"version": "1.1.0",
+		"version": "1.1.1",
 		"author": {
 			"name": "David Kudera",
 			"email": "sakren@gmail.com"
@@ -405,7 +405,7 @@
 			"mocha": "~1.14.0"
 		},
 		"scripts": {
-			"test": "cd ./test; echo \"Testing in node:\"; mocha ./node/index.js --reporter spec; cd ./browser; simq build; echo \"Testing in browser:\"; mocha-phantomjs ./index.html;"
+			"test": "cd ./test; echo \"Testing in node:\"; mocha ./node/index.js --reporter spec; cd ./browser; echo \"Testing in browser:\"; simq build; mocha-phantomjs ./index.html;"
 		}
 	}
 	}).call(this);
@@ -413,8 +413,8 @@
 
 }
 });
-require.version = '5.1.1';
-delete require.__setStats;
+require.__setStats({"/lib/Merge.js":{"atime":1385387764000,"mtime":1385387762000,"ctime":1385387762000},"/test/browser/tests/Merge.coffee":{"atime":1385387157000,"mtime":1385387105000,"ctime":1385387105000},"/package.json":{"atime":1385387640000,"mtime":1385387634000,"ctime":1385387634000}});
+require.version = '5.1.2';
 
 /** run section **/
 

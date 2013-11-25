@@ -10,7 +10,7 @@ merge = (left, right) ->
 		when '[object Array]'
 			for value, i in right
 				valueType = type.call(value)
-				if valueType == '[object Array]' || valueType == '[object Object]'
+				if (valueType == '[object Array]' || valueType == '[object Object]') && value != null
 					left[i] = merge(left[i], value)
 				else
 					left.push(value)
@@ -18,7 +18,7 @@ merge = (left, right) ->
 		when '[object Object]'
 			for name, value of right
 				valueType = type.call(value)
-				if typeof left[name] == 'undefined'
+				if typeof left[name] == 'undefined' || left[name] == null
 					left[name] = value
 				else if valueType == '[object Array]' || valueType == '[object Object]'
 					left[name] = merge(left[name], value)
