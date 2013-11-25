@@ -15,18 +15,24 @@
     it('should throw error if objects are not arrays or objects', function() {
       expect(function() {
         return merge('', '');
-      }).to["throw"](Error, 'Can not merge [object String] objects.');
+      }).to["throw"](Error, 'Can not merge scalar objects.');
       expect(function() {
         return merge(1, 1);
-      }).to["throw"](Error, 'Can not merge [object Number] objects.');
+      }).to["throw"](Error, 'Can not merge scalar objects.');
       return expect(function() {
         return merge(true, true);
-      }).to["throw"](Error, 'Can not merge [object Boolean] objects.');
+      }).to["throw"](Error, 'Can not merge scalar objects.');
     });
-    it('should return merged arrays', function() {
-      expect(merge([1, 2, 3], [1, 2, 3, 4, 5])).to.be.eql([1, 2, 3, 1, 2, 3, 4, 5]);
-      expect(merge([[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]])).to.be.eql([[1, 2, 3, 7, 8, 9], [4, 5, 6, 10, 11, 12]]);
-      expect(merge([1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12])).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    it('should return merged simple arrays', function() {
+      return expect(merge([1, 1, 2, 3], [3, 4, 4, 5], [10, 9, 8, 1])).to.be.eql([1, 1, 2, 3, 3, 4, 4, 5, 10, 9, 8, 1]);
+    });
+    it('should return merged advanced arrays', function() {
+      return expect(merge([[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]])).to.be.eql([[1, 2, 3, 7, 8, 9], [4, 5, 6, 10, 11, 12]]);
+    });
+    it('should return merged more than two arrays', function() {
+      return expect(merge([1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12])).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    });
+    it('should return merged arrays with objects', function() {
       return expect(merge([
         {
           one: 1,
@@ -50,8 +56,8 @@
         }, 7, 8, 9, 10, 11, 12
       ]);
     });
-    return it('should return merged objects', function() {
-      expect(merge({
+    it('should return merged simple objects', function() {
+      return expect(merge({
         hello: 'world'
       }, {
         world: 'hello'
@@ -59,7 +65,9 @@
         hello: 'world',
         world: 'hello'
       });
-      expect(merge({
+    });
+    it('should return merged advanced objects', function() {
+      return expect(merge({
         one: {
           two: 2,
           three: 3
@@ -93,7 +101,9 @@
           nine: 9
         }
       });
-      expect(merge({
+    });
+    it('should return merged more than two objects', function() {
+      return expect(merge({
         one: 1
       }, {
         two: 2
@@ -107,6 +117,8 @@
         three: 3,
         four: 4
       });
+    });
+    return it('should return merged objects with arrays', function() {
       return expect(merge({
         one: [1]
       }, {

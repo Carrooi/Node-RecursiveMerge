@@ -40,6 +40,9 @@ $ npm test
 
 ## Changelog
 
+* 1.2.0
+	+ Rewritten
+
 * 1.1.2 - 1.1.3
 	+ Bugs in IE8
 

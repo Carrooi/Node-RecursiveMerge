@@ -1,31 +1,77 @@
+_type = Object.prototype.toString
+
+
+isScalar = (variable) ->
+	return _type.call(variable) not in ['[object Array]', '[object Object]'] || variable == null
+
+
+isObject = (variable) ->
+	return variable != null && _type.call(variable) == '[object Object]'
+
+
+isArray = (variable) ->
+	return _type.call(variable) == '[object Array]'
+
+
 merge = (left, right) ->
-	type = Object.prototype.toString
-	leftType = type.call(left)
-	rightType = type.call(right)
+	if isScalar(left) || isScalar(right)
+		throw new Error 'Can not merge scalar objects.'
+
+	leftType = _type.call(left)
+	rightType = _type.call(right)
 
 	if leftType != rightType
 		throw new Error 'Can not merge ' + leftType + ' with ' + rightType + '.'
 
 	switch leftType
 		when '[object Array]'
-			for value, i in right
-				valueType = type.call(value)
-				if (valueType == '[object Array]' || valueType == '[object Object]') && value != null
-					left[i] = merge(left[i], value)
-				else
-					left.push(value)
+			return mergeArray(left, right)
 
 		when '[object Object]'
-			for name, value of right
-				if right.hasOwnProperty(name) && name not in ['__proto__']
-					valueType = type.call(value)
-					if typeof left[name] == 'undefined' || left[name] == null
-						left[name] = value
-					else if valueType == '[object Array]' || valueType == '[object Object]'
-						left[name] = merge(left[name], value)
+			return mergeObject(left, right)
 
 		else
 			throw new Error 'Can not merge ' + leftType + ' objects.'
+
+
+mergeArray = (left, right) ->
+	add = []
+
+	for rightValue, i in right
+		leftValue = left[i]
+
+		if (isObject(leftValue) && isObject(rightValue)) || (isArray(leftValue) && isArray(rightValue))
+			left[i] = merge(leftValue, rightValue)
+
+		else if isObject(rightValue)
+			add.push(merge({}, rightValue))
+
+		else if isArray(rightValue)
+			add.push(merge([], rightValue))
+
+		else
+			add.push(rightValue)
+
+	for value in add
+		left.push(value)
+
+	return left
+
+
+mergeObject = (left, right) ->
+	for key, value of right
+		if right.hasOwnProperty(key) && key not in ['__proto__']
+			if isScalar(value)
+				if !left.hasOwnProperty(key)
+					left[key] = value
+
+			else
+				if left.hasOwnProperty(key)
+					left[key] = merge(left[key], value)
+
+				else
+					mergeWith = if isObject(value) then {} else []
+					left[key] = merge(mergeWith, value)
 
 	return left
 
