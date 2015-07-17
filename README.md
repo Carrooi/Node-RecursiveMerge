@@ -2,6 +2,14 @@
 
 Recursive merge tool for arrays and objects.
 
+## Help
+
+Unfortunately I don't have any more time to maintain this repository :-( 
+
+Don't you want to save me and this project by taking over it?
+
+![sad cat](https://raw.githubusercontent.com/sakren/sakren.github.io/master/images/sad-kitten.jpg)
+
 ## Installation
 
 ```
@@ -39,6 +47,10 @@ $ npm test
 ```
 
 ## Changelog
+
+* 1.2.1
+	+ Move under Carrooi organization
+	+ Abandon package
 
 * 1.2.0
 	+ Rewritten

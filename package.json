@@ -1,10 +1,10 @@
 {
 	"name": "recursive-merge",
-	"description": "Recursive merge tool for arrays and objects",
-	"version": "1.2.0",
+	"description": "[ABANDONED] Recursive merge tool for arrays and objects",
+	"version": "1.2.1",
 	"author": {
 		"name": "David Kudera",
-		"email": "sakren@gmail.com"
+		"email": "kudera.d@gmail.com"
 	},
 	"keywords": [
 		"merge",
@@ -16,7 +16,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:sakren/node-recursive-merge.git"
+		"url": "git@github.com:Carrooi/Node-RecursiveMerge.git"
 	},
 	"engines": {
 		"node": "*"
@@ -31,3 +31,4 @@
 		"test": "cd ./test; echo \"Testing in node:\"; mocha ./node/index.js --reporter spec; cd ./browser; echo \"Testing in browser:\"; simq build; mocha-phantomjs ./index.html;"
 	}
 }
+
